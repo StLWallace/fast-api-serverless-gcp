@@ -1,11 +1,11 @@
-from routes.breweries import create_brewery
 from models.breweries import Brewery
+import pytest
+import os
 
 
-def test_breweries_post(test_api_client):
-    """Confirm response from post endpoint"""
-    app = test_api_client
-    test_brewery = Brewery(
+@pytest.fixture()
+def fake_brewery_record() -> Brewery:
+    yield Brewery(
         **{
             "name": "Test Brewery",
             "location": {"city": "Fake City", "state": "Fake State", "zipcode": "123"},
@@ -13,15 +13,15 @@ def test_breweries_post(test_api_client):
         }
     )
 
+
+def test_breweries_post(test_api_client, fake_brewery_record):
+    """Confirm response from post endpoint"""
+    app = test_api_client
+
     response = app.post(
         "/breweries/",
-        data=test_brewery.model_dump_json(),
+        content=fake_brewery_record.model_dump_json(),
         headers={"Content-Type": "application/json"},
     )
 
-    assert response.json() == test_brewery.dict()
-
-
-def test_create_brewery():
-    """Test underlying function"""
-    pass
+    assert response.json() == fake_brewery_record.model_dump()
