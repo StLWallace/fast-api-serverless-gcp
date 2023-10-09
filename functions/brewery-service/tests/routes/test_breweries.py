@@ -1,6 +1,5 @@
 from models.breweries import Brewery
 import pytest
-import os
 
 
 @pytest.fixture()

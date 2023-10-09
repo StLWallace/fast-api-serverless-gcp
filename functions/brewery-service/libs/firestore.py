@@ -71,20 +71,3 @@ def get_doc(collection_ref: CollectionReference, doc_id: str) -> dict:
     doc_ref = collection_ref.document(document_id=doc_id).get()
 
     return doc_ref.to_dict()
-
-
-if __name__ == "__main__":
-
-    client = get_firestore_client()
-    collection = get_firestore_collection("breweries", client=client)
-
-    # dox = get_docs(client=client, collection="bankers-residents")
-
-    four_hands = {
-        "name": "4 Hands",
-        "location": {"city": "St. Louis", "state": "MO", "zipcode": "63104"},
-        "contact": {"phone_number": "(314) 436-1559", "email": ""},
-    }
-    write = create_doc(collection_ref=collection, data=four_hands)
-
-    print(write)
