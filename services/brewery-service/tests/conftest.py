@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 import pytest
 from app import create_app
 from google.cloud.firestore_v1.types import WriteResult
+import os
 
 
 class MockDocument:
@@ -40,6 +41,7 @@ class MockFirestoreClient:
 @pytest.fixture
 def test_api_client(mock_firestore_collection) -> TestClient:
     """Create a FastAPI test client"""
+    os.environ["COLLECTION_NAME"] = "test_collection"
     app = create_app(firestore_collection=mock_firestore_collection)
     client = TestClient(app)
 

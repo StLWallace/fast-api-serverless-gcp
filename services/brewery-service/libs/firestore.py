@@ -1,6 +1,4 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from firebase_admin import credentials, firestore, initialize_app
 from google.cloud.firestore import Client, CollectionReference
 from google.cloud.firestore_v1.types import WriteResult
 from typing import List
@@ -10,7 +8,7 @@ def get_firestore_client() -> Client:
     """Initializes a Firestore client"""
     cred = credentials.ApplicationDefault()
 
-    firebase_admin.initialize_app(cred)
+    initialize_app(cred)
     client = firestore.client()
 
     return client

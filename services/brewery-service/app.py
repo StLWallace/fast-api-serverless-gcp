@@ -20,9 +20,9 @@ def set_firestore_collection() -> CollectionReference:
 
 
 def create_app(
+    firestore_collection: CollectionReference,
     docs_url: str = "/docs",
-    openapi_url: str = "openapi.json",
-    firestore_collection: CollectionReference = set_firestore_collection(),
+    openapi_url: str = "/openapi.json",
 ) -> FastAPI:
     """Configures the FastAPI app
     Args:
@@ -42,5 +42,6 @@ def create_app(
 
     return app
 
-
-app = create_app()
+# Define app and collection
+collection_ref = set_firestore_collection()
+app = create_app(firestore_collection=collection_ref)
