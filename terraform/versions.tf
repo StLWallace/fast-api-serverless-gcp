@@ -5,8 +5,15 @@ terraform {
       version = "5.1.0"
     }
   }
+  backend "gcs" {
+    bucket  = "tf-state-prod"
+    prefix  = "terraform/state"
+  }
 }
 
+
 provider "google" {
-  # Configuration options
+  project     = "my-project-id"
+  region      = "us-central1"
 }
+
