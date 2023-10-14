@@ -11,6 +11,7 @@ resource "google_cloud_run_v2_service" "brewery_service" {
         value = "breweries"
       }
     }
+    service_account = google_service_account.cloud_run_fast_api.email
   }
 }
 
