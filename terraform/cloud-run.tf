@@ -14,12 +14,3 @@ resource "google_cloud_run_v2_service" "brewery_service" {
     service_account = google_service_account.cloud_run_fast_api.email
   }
 }
-
-/*
-resource "google_cloud_run_v2_service_iam_member" "noauth" {
-  location = google_cloud_run_v2_service.brewery_service.location
-  name     = google_cloud_run_v2_service.brewery_service.name
-  role     = "roles/run.invoker"
-  member   = "allUsers"
-}
-*/
