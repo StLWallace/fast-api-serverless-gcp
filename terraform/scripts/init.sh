@@ -1,2 +1,2 @@
 #! /bin/bash
-terraform init
+terraform init --backend-config=backend_default.tfvars
