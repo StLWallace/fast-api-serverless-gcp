@@ -63,6 +63,8 @@ If your apply succeeds, your app should now be running in Cloud Run
 
 In a real production setting, it would be smart to consolidate the image build/push steps with the Terraform steps into a pipeline e.g. Cloud Build, Jenkins, etc.
 
+Note: With the current setup, the Terraform plan won't detect changes if the image is updated since it's using the `latest` tag. Using the git commit hash instead would be a better production option.
+
 
 # Testing the service on Cloud Run
 By default, your service shouldn't allow unauthenticated traffic. To setup a proxy to make requests against it, use:

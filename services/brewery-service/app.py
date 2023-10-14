@@ -33,12 +33,19 @@ def create_app(
     Returns:
         a FastAPI object
     """
-    app = FastAPI()
+    app = FastAPI(
+        title="Brewery Service",
+        description="API to get and manage information about breweries and beers"
+    )
 
     app.include_router(BreweryRouter(firestore_collection).router, prefix="/breweries")
     app.include_router(BeerRouter(firestore_collection).router, prefix="/beers")
     app.docs_url = docs_url
     app.openapi_url = openapi_url
+
+    @app.get("/")
+    async def welcome() -> str:
+        return "Welcome to the Brewery Service."
 
     return app
 
